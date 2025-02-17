@@ -9,6 +9,8 @@ import (
 	"net/http"
 
 	"github.com/kyuff/anchor"
+	"github.com/kyuff/example-petstore/generated/api"
+	"github.com/kyuff/example-petstore/internal/petstore"
 )
 
 type HttpServer struct {
@@ -35,9 +37,17 @@ func (h *HttpServer) Close() error {
 }
 
 var httpServer = anchor.Singleton(func() (*HttpServer, error) {
-	server := &http.Server{}
-	server.Addr = ":8080"
 	return &HttpServer{
-		server: server,
+		server: &http.Server{
+			Addr: ":8080",
+			Handler: api.HandlerFromMux(
+				api.NewStrictHandler(httpApi(), nil),
+				http.NewServeMux(),
+			),
+		},
 	}, nil
+})
+
+var httpApi = anchor.Singleton(func() (*petstore.API, error) {
+	return &petstore.API{}, nil
 })
