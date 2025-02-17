@@ -3,7 +3,7 @@ module github.com/kyuff/example-petstore
 go 1.24.0
 
 require (
-	github.com/kyuff/anchor v0.0.0-20250217082559-061e55f0d0c8
+	github.com/kyuff/anchor v0.0.0-20250217121401-e3db19c54d86
 	github.com/oapi-codegen/runtime v1.1.1
 )
 
