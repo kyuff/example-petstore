@@ -13,6 +13,18 @@ import (
 	"github.com/kyuff/example-petstore/internal/petstore"
 )
 
+func NewHttpServer() (*HttpServer, error) {
+	return &HttpServer{
+		server: &http.Server{
+			Addr: ":8080",
+			Handler: api.HandlerFromMux(
+				api.NewStrictHandler(httpApi(), nil),
+				http.NewServeMux(),
+			),
+		},
+	}, nil
+}
+
 type HttpServer struct {
 	server *http.Server
 }
@@ -35,18 +47,6 @@ func (h *HttpServer) Start(ctx context.Context) error {
 func (h *HttpServer) Close() error {
 	return h.server.Shutdown(context.Background())
 }
-
-var httpServer = anchor.Singleton(func() (*HttpServer, error) {
-	return &HttpServer{
-		server: &http.Server{
-			Addr: ":8080",
-			Handler: api.HandlerFromMux(
-				api.NewStrictHandler(httpApi(), nil),
-				http.NewServeMux(),
-			),
-		},
-	}, nil
-})
 
 var httpApi = anchor.Singleton(func() (*petstore.API, error) {
 	return &petstore.API{}, nil
