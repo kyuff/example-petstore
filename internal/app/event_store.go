@@ -4,6 +4,7 @@ import (
 	"github.com/kyuff/anchor"
 	"github.com/kyuff/es"
 	"github.com/kyuff/es/storage/inmemory"
+	"github.com/kyuff/example-petstore/internal/domain/pets"
 )
 
 var eventStore = anchor.Singleton(func() (*es.Store, error) {
@@ -11,10 +12,6 @@ var eventStore = anchor.Singleton(func() (*es.Store, error) {
 		// TODO Upgrade to a persistent storage
 		inmemory.New(),
 		es.WithSlog(logger()),
-		es.WithEvents(
-			"TODO",
-			// TODO Register events
-			nil,
-		),
+		es.WithEvents(pets.EntityType, pets.Events),
 	), nil
 })

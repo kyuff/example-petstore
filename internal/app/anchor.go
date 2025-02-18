@@ -11,9 +11,10 @@ import (
 func Run(wire anchor.Wire) int {
 	return anchor.New(wire, anchor.WithDefaultSlog()).
 		Add(
+			anchor.Setup("commands.Dispatcher", registerCommands),
 			anchor.Setup("features", func() error {
 				return errors.Join(
-					pets_crud.New(httpApi()),
+					pets_crud.New(httpApi(), dispatcher()),
 					pets_view.New(httpApi()),
 				)
 			}),
