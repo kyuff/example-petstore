@@ -19,6 +19,7 @@ func Run(wire anchor.Wire) int {
 			}),
 		).
 		Add(
+			eventStore(),
 			anchor.Make("http.Server", NewHttpServer),
 		).
 		Run()
