@@ -4,12 +4,19 @@ import (
 	"context"
 
 	"github.com/kyuff/es"
+	"github.com/kyuff/example-petstore/internal/domain/values"
 )
 
 type AddPetCommand struct {
+	ID        values.PetID      `json:"id"`
+	PetName   values.PetName    `json:"name"`
+	PhotoURLs []values.PhotoURL `json:"photo_urls"`
+	Category  values.Category   `json:"category"`
+	Status    values.PetStatus  `json:"status"`
+	Tags      []values.Tag      `json:"tags"`
 }
 
-func (cmd AddPetCommand) Name() string {
+func (cmd AddPetCommand) CommandName() string {
 	return "AddPetCommand"
 
 }
