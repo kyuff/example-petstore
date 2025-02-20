@@ -61,8 +61,8 @@ github.com/kyuff/anchor v0.0.0-20250218074811-b53c5dd66dca h1:iPqQ5Ea/4UjBxHkLHd
 github.com/kyuff/anchor v0.0.0-20250218074811-b53c5dd66dca/go.mod h1:HHMkAxtwsoWU9XG6eWPBPNhLGEIjRhldPQDCAKg4PgM=
 github.com/kyuff/es v0.0.0-20250218102440-e65fa431eec9 h1:bIb2azbbqrGnmFSFIjJcl+igSIUNcmTQLv4rRz3HVPA=
 github.com/kyuff/es v0.0.0-20250218102440-e65fa431eec9/go.mod h1:wjvM1pl0kSvCVKCfiR/q4wcRwbtEutx1025fLuegOB0=
-github.com/kyuff/es-commands v0.0.0-20250219093043-30ae79686c3c h1:Tc2agd3BHVDTxc28yorkCukEM13FbofNDHUSzIvkxDE=
-github.com/kyuff/es-commands v0.0.0-20250219093043-30ae79686c3c/go.mod h1:ZN4O3eQxgB0iBeiIgDNVzieAQleejddUojTLsOBzvmg=
+github.com/kyuff/es-commands v0.0.0-20250220094239-c871507a577a h1:dMC1rc/e2fRcpGjq4NNvu4JUvZcO3dthl+TQFZl+CT8=
+github.com/kyuff/es-commands v0.0.0-20250220094239-c871507a577a/go.mod h1:ZN4O3eQxgB0iBeiIgDNVzieAQleejddUojTLsOBzvmg=
 github.com/kyuff/validate v0.0.0-20250220092053-10750838ba8d h1:h9TJFPRuHqWP0SkWhQZmgDoSpsAnnZajSnKhQIl9Sho=
 github.com/kyuff/validate v0.0.0-20250220092053-10750838ba8d/go.mod h1:gURORMLu/SJ7QKfm8ss/7k9doVBXOzyTWyb21udVK0Y=
 github.com/mailru/easyjson v0.7.7 h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0=
