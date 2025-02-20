@@ -6,6 +6,7 @@ require (
 	github.com/kyuff/anchor v0.0.0-20250218074811-b53c5dd66dca
 	github.com/kyuff/es v0.0.0-20250218102440-e65fa431eec9
 	github.com/kyuff/es-commands v0.0.0-20250219093043-30ae79686c3c
+	github.com/kyuff/validate v0.0.0-20250220092053-10750838ba8d
 	github.com/oapi-codegen/runtime v1.1.1
 )
 

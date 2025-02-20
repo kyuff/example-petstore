@@ -11,6 +11,11 @@ type AddPetCommand struct {
 
 func (cmd AddPetCommand) Name() string {
 	return "AddPetCommand"
+
+}
+
+func (cmd AddPetCommand) Validate() error {
+	return nil
 }
 
 func NewAddPetCommandExecutor() func(ctx context.Context, cmd AddPetCommand, state *State) ([]es.Content, error) {
