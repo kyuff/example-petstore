@@ -3,7 +3,4 @@ package: "api"
 output: "../generated/api/petstore.go"
 generate:
   std-http-server: true
-  strict-server: true
   models: true
-output-options:
-  user-templates:

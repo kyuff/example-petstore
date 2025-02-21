@@ -14,11 +14,12 @@ import (
 )
 
 func NewHttpServer() (*HttpServer, error) {
+
 	return &HttpServer{
 		server: &http.Server{
 			Addr: ":8080",
 			Handler: api.HandlerFromMux(
-				api.NewStrictHandler(httpApi(), nil),
+				httpApi(),
 				http.NewServeMux(),
 			),
 		},

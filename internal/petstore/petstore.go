@@ -1,107 +1,107 @@
 package petstore
 
 import (
-	"context"
+	"net/http"
 
 	"github.com/kyuff/example-petstore/generated/api"
 )
 
 type API struct {
-	AddPetFunc                   func(ctx context.Context, request api.AddPetRequestObject) (api.AddPetResponseObject, error)
-	UpdatePetFunc                func(ctx context.Context, request api.UpdatePetRequestObject) (api.UpdatePetResponseObject, error)
-	FindPetsByStatusFunc         func(ctx context.Context, request api.FindPetsByStatusRequestObject) (api.FindPetsByStatusResponseObject, error)
-	FindPetsByTagsFunc           func(ctx context.Context, request api.FindPetsByTagsRequestObject) (api.FindPetsByTagsResponseObject, error)
-	DeletePetFunc                func(ctx context.Context, request api.DeletePetRequestObject) (api.DeletePetResponseObject, error)
-	GetPetByIdFunc               func(ctx context.Context, request api.GetPetByIdRequestObject) (api.GetPetByIdResponseObject, error)
-	UpdatePetWithFormFunc        func(ctx context.Context, request api.UpdatePetWithFormRequestObject) (api.UpdatePetWithFormResponseObject, error)
-	UploadFileFunc               func(ctx context.Context, request api.UploadFileRequestObject) (api.UploadFileResponseObject, error)
-	GetInventoryFunc             func(ctx context.Context, request api.GetInventoryRequestObject) (api.GetInventoryResponseObject, error)
-	PlaceOrderFunc               func(ctx context.Context, request api.PlaceOrderRequestObject) (api.PlaceOrderResponseObject, error)
-	DeleteOrderFunc              func(ctx context.Context, request api.DeleteOrderRequestObject) (api.DeleteOrderResponseObject, error)
-	GetOrderByIdFunc             func(ctx context.Context, request api.GetOrderByIdRequestObject) (api.GetOrderByIdResponseObject, error)
-	CreateUserFunc               func(ctx context.Context, request api.CreateUserRequestObject) (api.CreateUserResponseObject, error)
-	CreateUsersWithListInputFunc func(ctx context.Context, request api.CreateUsersWithListInputRequestObject) (api.CreateUsersWithListInputResponseObject, error)
-	LoginUserFunc                func(ctx context.Context, request api.LoginUserRequestObject) (api.LoginUserResponseObject, error)
-	LogoutUserFunc               func(ctx context.Context, request api.LogoutUserRequestObject) (api.LogoutUserResponseObject, error)
-	DeleteUserFunc               func(ctx context.Context, request api.DeleteUserRequestObject) (api.DeleteUserResponseObject, error)
-	GetUserByNameFunc            func(ctx context.Context, request api.GetUserByNameRequestObject) (api.GetUserByNameResponseObject, error)
-	UpdateUserFunc               func(ctx context.Context, request api.UpdateUserRequestObject) (api.UpdateUserResponseObject, error)
+	AddPetFunc                   func(w http.ResponseWriter, r *http.Request)
+	UpdatePetFunc                func(w http.ResponseWriter, r *http.Request)
+	FindPetsByStatusFunc         func(w http.ResponseWriter, r *http.Request, params api.FindPetsByStatusParams)
+	FindPetsByTagsFunc           func(w http.ResponseWriter, r *http.Request, params api.FindPetsByTagsParams)
+	DeletePetFunc                func(w http.ResponseWriter, r *http.Request, petId int64, params api.DeletePetParams)
+	GetPetByIdFunc               func(w http.ResponseWriter, r *http.Request, petId int64)
+	UpdatePetWithFormFunc        func(w http.ResponseWriter, r *http.Request, petId int64, params api.UpdatePetWithFormParams)
+	UploadFileFunc               func(w http.ResponseWriter, r *http.Request, petId int64, params api.UploadFileParams)
+	GetInventoryFunc             func(w http.ResponseWriter, r *http.Request)
+	PlaceOrderFunc               func(w http.ResponseWriter, r *http.Request)
+	DeleteOrderFunc              func(w http.ResponseWriter, r *http.Request, orderId int64)
+	GetOrderByIdFunc             func(w http.ResponseWriter, r *http.Request, orderId int64)
+	CreateUserFunc               func(w http.ResponseWriter, r *http.Request)
+	CreateUsersWithListInputFunc func(w http.ResponseWriter, r *http.Request)
+	LoginUserFunc                func(w http.ResponseWriter, r *http.Request, params api.LoginUserParams)
+	LogoutUserFunc               func(w http.ResponseWriter, r *http.Request)
+	DeleteUserFunc               func(w http.ResponseWriter, r *http.Request, username string)
+	GetUserByNameFunc            func(w http.ResponseWriter, r *http.Request, username string)
+	UpdateUserFunc               func(w http.ResponseWriter, r *http.Request, username string)
 }
 
-var _ api.StrictServerInterface = (*API)(nil)
+var _ api.ServerInterface = (*API)(nil)
 
-func (api *API) AddPet(ctx context.Context, request api.AddPetRequestObject) (api.AddPetResponseObject, error) {
-	return api.AddPetFunc(ctx, request)
+func (api *API) AddPet(w http.ResponseWriter, r *http.Request) {
+	api.AddPetFunc(w, r)
 }
 
-func (api *API) UpdatePet(ctx context.Context, request api.UpdatePetRequestObject) (api.UpdatePetResponseObject, error) {
-	return api.UpdatePetFunc(ctx, request)
+func (api *API) UpdatePet(w http.ResponseWriter, r *http.Request) {
+	api.UpdatePetFunc(w, r)
 }
 
-func (api *API) FindPetsByStatus(ctx context.Context, request api.FindPetsByStatusRequestObject) (api.FindPetsByStatusResponseObject, error) {
-	return api.FindPetsByStatusFunc(ctx, request)
+func (api *API) FindPetsByStatus(w http.ResponseWriter, r *http.Request, params api.FindPetsByStatusParams) {
+	api.FindPetsByStatusFunc(w, r, params)
 }
 
-func (api *API) FindPetsByTags(ctx context.Context, request api.FindPetsByTagsRequestObject) (api.FindPetsByTagsResponseObject, error) {
-	return api.FindPetsByTagsFunc(ctx, request)
+func (api *API) FindPetsByTags(w http.ResponseWriter, r *http.Request, params api.FindPetsByTagsParams) {
+	api.FindPetsByTagsFunc(w, r, params)
 }
 
-func (api *API) DeletePet(ctx context.Context, request api.DeletePetRequestObject) (api.DeletePetResponseObject, error) {
-	return api.DeletePetFunc(ctx, request)
+func (api *API) DeletePet(w http.ResponseWriter, r *http.Request, petId int64, params api.DeletePetParams) {
+	api.DeletePetFunc(w, r, petId, params)
 }
 
-func (api *API) GetPetById(ctx context.Context, request api.GetPetByIdRequestObject) (api.GetPetByIdResponseObject, error) {
-	return api.GetPetByIdFunc(ctx, request)
+func (api *API) GetPetById(w http.ResponseWriter, r *http.Request, petId int64) {
+	api.GetPetByIdFunc(w, r, petId)
 }
 
-func (api *API) UpdatePetWithForm(ctx context.Context, request api.UpdatePetWithFormRequestObject) (api.UpdatePetWithFormResponseObject, error) {
-	return api.UpdatePetWithFormFunc(ctx, request)
+func (api *API) UpdatePetWithForm(w http.ResponseWriter, r *http.Request, petId int64, params api.UpdatePetWithFormParams) {
+	api.UpdatePetWithFormFunc(w, r, petId, params)
 }
 
-func (api *API) UploadFile(ctx context.Context, request api.UploadFileRequestObject) (api.UploadFileResponseObject, error) {
-	return api.UploadFileFunc(ctx, request)
+func (api *API) UploadFile(w http.ResponseWriter, r *http.Request, petId int64, params api.UploadFileParams) {
+	api.UploadFileFunc(w, r, petId, params)
 }
 
-func (api *API) GetInventory(ctx context.Context, request api.GetInventoryRequestObject) (api.GetInventoryResponseObject, error) {
-	return api.GetInventoryFunc(ctx, request)
+func (api *API) GetInventory(w http.ResponseWriter, r *http.Request) {
+	api.GetInventoryFunc(w, r)
 }
 
-func (api *API) PlaceOrder(ctx context.Context, request api.PlaceOrderRequestObject) (api.PlaceOrderResponseObject, error) {
-	return api.PlaceOrderFunc(ctx, request)
+func (api *API) PlaceOrder(w http.ResponseWriter, r *http.Request) {
+	api.PlaceOrderFunc(w, r)
 }
 
-func (api *API) DeleteOrder(ctx context.Context, request api.DeleteOrderRequestObject) (api.DeleteOrderResponseObject, error) {
-	return api.DeleteOrderFunc(ctx, request)
+func (api *API) DeleteOrder(w http.ResponseWriter, r *http.Request, orderId int64) {
+	api.DeleteOrderFunc(w, r, orderId)
 }
 
-func (api *API) GetOrderById(ctx context.Context, request api.GetOrderByIdRequestObject) (api.GetOrderByIdResponseObject, error) {
-	return api.GetOrderByIdFunc(ctx, request)
+func (api *API) GetOrderById(w http.ResponseWriter, r *http.Request, orderId int64) {
+	api.GetOrderByIdFunc(w, r, orderId)
 }
 
-func (api *API) CreateUser(ctx context.Context, request api.CreateUserRequestObject) (api.CreateUserResponseObject, error) {
-	return api.CreateUserFunc(ctx, request)
+func (api *API) CreateUser(w http.ResponseWriter, r *http.Request) {
+	api.CreateUserFunc(w, r)
 }
 
-func (api *API) CreateUsersWithListInput(ctx context.Context, request api.CreateUsersWithListInputRequestObject) (api.CreateUsersWithListInputResponseObject, error) {
-	return api.CreateUsersWithListInputFunc(ctx, request)
+func (api *API) CreateUsersWithListInput(w http.ResponseWriter, r *http.Request) {
+	api.CreateUsersWithListInputFunc(w, r)
 }
 
-func (api *API) LoginUser(ctx context.Context, request api.LoginUserRequestObject) (api.LoginUserResponseObject, error) {
-	return api.LoginUserFunc(ctx, request)
+func (api *API) LoginUser(w http.ResponseWriter, r *http.Request, params api.LoginUserParams) {
+	api.LoginUserFunc(w, r, params)
 }
 
-func (api *API) LogoutUser(ctx context.Context, request api.LogoutUserRequestObject) (api.LogoutUserResponseObject, error) {
-	return api.LogoutUserFunc(ctx, request)
+func (api *API) LogoutUser(w http.ResponseWriter, r *http.Request) {
+	api.LogoutUserFunc(w, r)
 }
 
-func (api *API) DeleteUser(ctx context.Context, request api.DeleteUserRequestObject) (api.DeleteUserResponseObject, error) {
-	return api.DeleteUserFunc(ctx, request)
+func (api *API) DeleteUser(w http.ResponseWriter, r *http.Request, username string) {
+	api.DeleteUserFunc(w, r, username)
 }
 
-func (api *API) GetUserByName(ctx context.Context, request api.GetUserByNameRequestObject) (api.GetUserByNameResponseObject, error) {
-	return api.GetUserByNameFunc(ctx, request)
+func (api *API) GetUserByName(w http.ResponseWriter, r *http.Request, username string) {
+	api.GetUserByNameFunc(w, r, username)
 }
 
-func (api *API) UpdateUser(ctx context.Context, request api.UpdateUserRequestObject) (api.UpdateUserResponseObject, error) {
-	return api.UpdateUserFunc(ctx, request)
+func (api *API) UpdateUser(w http.ResponseWriter, r *http.Request, username string) {
+	api.UpdateUserFunc(w, r, username)
 }

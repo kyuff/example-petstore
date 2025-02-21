@@ -4,9 +4,9 @@ go 1.24.0
 
 require (
 	github.com/kyuff/anchor v0.0.0-20250218074811-b53c5dd66dca
-	github.com/kyuff/es v0.0.0-20250218102440-e65fa431eec9
-	github.com/kyuff/es-commands v0.0.0-20250220094239-c871507a577a
-	github.com/kyuff/validate v0.0.0-20250220092053-10750838ba8d
+	github.com/kyuff/es v0.0.0-20250221124002-569029802aff
+	github.com/kyuff/es-commands v0.0.0-20250220124228-24af0ab390d4
+	github.com/kyuff/validate v0.0.0-20250221125239-881fd0e1f7fe
 	github.com/oapi-codegen/runtime v1.1.1
 )
 
@@ -20,6 +20,7 @@ require (
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/invopop/yaml v0.3.1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
+	github.com/kyuff/testdata v1.1.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
 	github.com/oapi-codegen/oapi-codegen/v2 v2.4.1 // indirect
