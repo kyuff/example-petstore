@@ -4,9 +4,9 @@ go 1.24.0
 
 require (
 	github.com/kyuff/anchor v0.0.0-20250218074811-b53c5dd66dca
-	github.com/kyuff/es v0.0.0-20250219091346-f1e519961cfd
+	github.com/kyuff/es v0.0.0-20250221124002-569029802aff
 	github.com/kyuff/es-commands v0.0.0-20250220124228-24af0ab390d4
-	github.com/kyuff/validate v0.0.0-20250220092053-10750838ba8d
+	github.com/kyuff/validate v0.0.0-20250221125239-881fd0e1f7fe
 	github.com/oapi-codegen/runtime v1.1.1
 )
 
