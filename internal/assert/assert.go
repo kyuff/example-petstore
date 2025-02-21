@@ -1,0 +1,157 @@
+package assert
+
+import (
+	"errors"
+	"fmt"
+	"regexp"
+	"testing"
+)
+
+func Equal[T comparable](t *testing.T, expected, got T) bool {
+	t.Helper()
+	return Equalf(t, expected, got, "Items was not equal")
+}
+func Equalf[T comparable](t *testing.T, expected, got T, format string, args ...any) bool {
+	t.Helper()
+	if expected != got {
+		t.Logf(`
+%s
+Expected: %v
+     Got: %v`, fmt.Sprintf(format, args...), expected, got)
+		t.Fail()
+		return false
+	}
+	return true
+}
+
+func Truef(t *testing.T, got bool, format string, args ...any) bool {
+	t.Helper()
+	if !got {
+		t.Logf(format, args...)
+		t.Fail()
+		return false
+	}
+
+	return true
+}
+
+func EqualSlice[T comparable](t *testing.T, expected, got []T) bool {
+	t.Helper()
+	if len(expected) != len(got) {
+		t.Errorf(`Expected %d elements, but got %d`, len(expected), len(got))
+		return false
+	}
+
+	for i := range len(expected) {
+		if !Equal(t, expected[i], got[i]) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func NoError(t *testing.T, got error) bool {
+	t.Helper()
+	if got != nil {
+		t.Logf("Unexpected error: %s", got)
+		t.Fail()
+		return false
+	}
+
+	return true
+}
+
+func Error(t *testing.T, got error) bool {
+	t.Helper()
+	if got == nil {
+		t.Logf("Expected error: %s", got)
+		t.Fail()
+		return false
+	}
+
+	return true
+}
+
+func Panic(t *testing.T, assert func()) {
+	t.Helper()
+	defer func() {
+		if m := recover(); m != nil {
+			return
+		}
+		t.Logf(`Expected panic, but it did not happen!`)
+		t.Fail()
+	}()
+
+	assert()
+}
+
+func NoPanic(t *testing.T, assert func()) {
+	t.Helper()
+	defer func() {
+		if m := recover(); m != nil {
+			t.Logf("Unexpected panic: %v", m)
+			t.Fail()
+		}
+	}()
+
+	assert()
+}
+
+func Match[T ~string](t *testing.T, expectedRE string, got T) bool {
+	t.Helper()
+	re, err := regexp.Compile(expectedRE)
+	if err != nil {
+		t.Logf("unexpected regexp: %s", err)
+		t.Fail()
+		return false
+	}
+
+	match := re.MatchString(string(got))
+	if !match {
+		t.Logf(`
+Must match %q
+       Got %q`, expectedRE, got)
+		t.Fail()
+		return false
+	}
+
+	return true
+}
+
+func ErrorIs(t *testing.T, want error, got error) bool {
+	t.Helper()
+	if errors.Is(got, want) {
+		return true
+	}
+
+	t.Logf("Expected error: %T", want)
+	t.Logf("\tGot error chain:")
+	for got != nil {
+		t.Logf("\t- [%T] %s", got, got.Error())
+		got = errors.Unwrap(got)
+	}
+
+	t.Fail()
+	return false
+}
+
+func Type[T any](t *testing.T, got any, assertion func(got T)) {
+	t.Helper()
+	if got == nil {
+		var expected T
+		t.Logf("expected type %T, got nil", expected)
+		t.Fail()
+		return
+	}
+
+	o, ok := got.(T)
+	if !ok {
+		var expected T
+		t.Logf("expected type %T, got %T", expected, got)
+		t.Fail()
+		return
+	}
+
+	assertion(o)
+}

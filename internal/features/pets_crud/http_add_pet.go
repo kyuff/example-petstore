@@ -1,16 +1,16 @@
 package pets_crud
 
 import (
-	"context"
-	"fmt"
+	"net/http"
 	"strings"
 
 	"github.com/kyuff/example-petstore/generated/api"
+	"github.com/kyuff/example-petstore/internal/content"
 	"github.com/kyuff/example-petstore/internal/domain/pets"
 	"github.com/kyuff/example-petstore/internal/domain/values"
 )
 
-func NewAddPetHandler(dispatcher Dispatcher) func(ctx context.Context, request api.AddPetRequestObject) (api.AddPetResponseObject, error) {
+func NewAddPetHandler(dispatcher Dispatcher) func(w http.ResponseWriter, r *http.Request) {
 	mapStatus := func(s *api.PetStatus) values.PetStatus {
 		if s == nil {
 			return ""
@@ -55,21 +55,16 @@ func NewAddPetHandler(dispatcher Dispatcher) func(ctx context.Context, request a
 		return result
 	}
 
-	return func(ctx context.Context, request api.AddPetRequestObject) (api.AddPetResponseObject, error) {
-		var pet api.Pet
-		var ok api.AddPetResponseObject
-		if request.JSONBody != nil {
-			pet = *request.JSONBody
-			ok = api.AddPet200JSONResponse(pet)
-		} else if request.FormdataBody != nil {
-			pet = *request.FormdataBody
-			ok = api.AddPet200JSONResponse(pet)
-		} else {
-			return nil, fmt.Errorf("no request provided")
+	return func(w http.ResponseWriter, r *http.Request) {
+		rw := content.New[*api.Pet](r, w)
+		pet, err := rw.Read()
+		if err != nil {
+			rw.Write(http.StatusMethodNotAllowed, nil)
+			return
 		}
 
 		var petID = values.PetIDFromPtr(pet.Id)
-		err := dispatcher.Dispatch(ctx, petID.String(), pets.AddPetCommand{
+		err = dispatcher.Dispatch(r.Context(), petID.String(), pets.AddPetCommand{
 			ID:        petID,
 			PetName:   values.PetName(pet.Name),
 			PhotoURLs: mapPhotoURLs(pet.PhotoUrls),
@@ -78,10 +73,11 @@ func NewAddPetHandler(dispatcher Dispatcher) func(ctx context.Context, request a
 			Tags:      mapTags(pet.Tags),
 		})
 		if err != nil {
-			return nil, err
+			rw.Write(http.StatusMethodNotAllowed, nil)
+			return
 		}
 
-		return ok, nil
+		rw.Write(http.StatusMethodNotAllowed, pet)
 	}
 }
 
