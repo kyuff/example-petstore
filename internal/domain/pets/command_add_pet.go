@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/kyuff/es"
+	commands "github.com/kyuff/es-commands"
 	"github.com/kyuff/example-petstore/internal/domain/values"
 )
 
@@ -25,11 +26,16 @@ func (cmd AddPetCommand) Validate() error {
 	return nil
 }
 
-func NewAddPetCommandExecutor() func(ctx context.Context, cmd AddPetCommand, state *State) ([]es.Content, error) {
+func NewAddPetCommandExecutor() commands.ExecutorFunc[AddPetCommand, *State] {
 	return func(ctx context.Context, cmd AddPetCommand, state *State) ([]es.Content, error) {
-		// TODO handle idempotence and general business logic
+		if state.ID == cmd.ID {
+			// idempotency
+			return nil, nil
+		}
 		return []es.Content{
-			Added{},
+			Added{
+				ID: cmd.ID,
+			},
 		}, nil
 	}
 }

@@ -69,6 +69,8 @@ github.com/kyuff/es-commands v0.0.0-20250220094239-c871507a577a h1:dMC1rc/e2fRcp
 github.com/kyuff/es-commands v0.0.0-20250220094239-c871507a577a/go.mod h1:ZN4O3eQxgB0iBeiIgDNVzieAQleejddUojTLsOBzvmg=
 github.com/kyuff/es-commands v0.0.0-20250220124228-24af0ab390d4 h1:ZsWKrNUFGq3EJ8COCK3UveZGactBH2QMkmd7O2GJCik=
 github.com/kyuff/es-commands v0.0.0-20250220124228-24af0ab390d4/go.mod h1:ZN4O3eQxgB0iBeiIgDNVzieAQleejddUojTLsOBzvmg=
+github.com/kyuff/testdata v1.1.0 h1:YYXOczAxsuD3EDSGDGUhHGvEA3jPtGynES6CgjEWdhU=
+github.com/kyuff/testdata v1.1.0/go.mod h1:0CHN2rlgGgfmwAis8lqMuriqZVc4BKMVAO5mGuYDndA=
 github.com/kyuff/validate v0.0.0-20250220092053-10750838ba8d h1:h9TJFPRuHqWP0SkWhQZmgDoSpsAnnZajSnKhQIl9Sho=
 github.com/kyuff/validate v0.0.0-20250220092053-10750838ba8d/go.mod h1:gURORMLu/SJ7QKfm8ss/7k9doVBXOzyTWyb21udVK0Y=
 github.com/kyuff/validate v0.0.0-20250221125239-881fd0e1f7fe h1:6YiAP6WdhZRxvHnqp1ajpEpMbk03ak+EyYNySMI1MVQ=

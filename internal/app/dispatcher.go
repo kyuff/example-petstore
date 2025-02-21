@@ -20,5 +20,6 @@ var dispatcher = anchor.Singleton(func() (*commands.Dispatcher, error) {
 func registerCommands() error {
 	return errors.Join(
 		commands.RegisterFunc(dispatcher(), pets.EntityType, pets.NewAddPetCommandExecutor()),
+		commands.Register(dispatcher(), pets.EntityType, pets.NewAddPetCommandExecutor()),
 	)
 }
