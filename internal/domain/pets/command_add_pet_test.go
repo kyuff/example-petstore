@@ -21,8 +21,8 @@ func TestNewAddPetCommandExecutor(t *testing.T) {
 			sut = pets.NewAddPetCommandExecutor()
 
 			_     = testdata.MakeStickyWith[values.PetID](t, cfg)
-			added = testdata.MakeWith[pets.Added](t, cfg)
-			state = es.ApplyState(t, &pets.State{}, added)
+			added = testdata.MakeWith[pets.AddedV1](t, cfg)
+			state = es.HydrateState(t, &pets.State{}, added)
 			cmd   = testdata.MakeWith[pets.AddPetCommand](t, cfg)
 		)
 
@@ -31,15 +31,15 @@ func TestNewAddPetCommandExecutor(t *testing.T) {
 
 		// assert
 		assert.NoError(t, err)
-		assert.Equal(t, 0, len(got))
+		es.VerifyEvents(t, got)
 	})
 
-	t.Run("emit Added", func(t *testing.T) {
+	t.Run("emit AddedV1", func(t *testing.T) {
 		// arrange
 		var (
 			sut = pets.NewAddPetCommandExecutor()
 
-			state = es.ApplyState(t, &pets.State{})
+			state = es.HydrateState(t, &pets.State{})
 			cmd   = testdata.MakeWith[pets.AddPetCommand](t, cfg)
 		)
 
@@ -48,6 +48,11 @@ func TestNewAddPetCommandExecutor(t *testing.T) {
 
 		// assert
 		assert.NoError(t, err)
-		assert.Equal(t, 1, len(got))
+		es.VerifyEvents(t, got,
+			pets.AddedV1{
+				ID:      cmd.ID,
+				PetName: cmd.PetName,
+			},
+		)
 	})
 }

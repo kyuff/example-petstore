@@ -7,13 +7,14 @@ import (
 
 var EntityType = "pets"
 var Events = []es.Content{
-	Added{},
+	AddedV1{},
 }
 
-type Added struct {
-	ID values.PetID `json:"id"`
+type AddedV1 struct {
+	ID      values.PetID   `json:"id"`
+	PetName values.PetName `json:"name"`
 }
 
-func (e Added) Name() string {
+func (e AddedV1) EventName() string {
 	return "AddedV1"
 }
