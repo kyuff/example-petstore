@@ -65,6 +65,8 @@ github.com/kyuff/es v0.0.0-20250219091346-f1e519961cfd h1:V0cDn4FBf3jClBdu3jhQsA
 github.com/kyuff/es v0.0.0-20250219091346-f1e519961cfd/go.mod h1:wjvM1pl0kSvCVKCfiR/q4wcRwbtEutx1025fLuegOB0=
 github.com/kyuff/es v0.0.0-20250221124002-569029802aff h1:8EnQjZ77RvCO24B1Gnr1epiwyC/CUAcnsXiGhLNpIak=
 github.com/kyuff/es v0.0.0-20250221124002-569029802aff/go.mod h1:wjvM1pl0kSvCVKCfiR/q4wcRwbtEutx1025fLuegOB0=
+github.com/kyuff/es v0.0.0-20250222174106-524bc5d19b71 h1:8b9FinXpbg4Fr6v7889VP2knukN1fYz6bJUUHx6PK04=
+github.com/kyuff/es v0.0.0-20250222174106-524bc5d19b71/go.mod h1:wjvM1pl0kSvCVKCfiR/q4wcRwbtEutx1025fLuegOB0=
 github.com/kyuff/es-commands v0.0.0-20250220094239-c871507a577a h1:dMC1rc/e2fRcpGjq4NNvu4JUvZcO3dthl+TQFZl+CT8=
 github.com/kyuff/es-commands v0.0.0-20250220094239-c871507a577a/go.mod h1:ZN4O3eQxgB0iBeiIgDNVzieAQleejddUojTLsOBzvmg=
 github.com/kyuff/es-commands v0.0.0-20250220124228-24af0ab390d4 h1:ZsWKrNUFGq3EJ8COCK3UveZGactBH2QMkmd7O2GJCik=

@@ -13,12 +13,12 @@ type State struct {
 
 func (s *State) Handle(ctx context.Context, event es.Event) error {
 	switch e := event.Content.(type) {
-	case Added:
+	case AddedV1:
 		s.applyAdded(e)
 	}
 	return nil
 }
 
-func (s *State) applyAdded(e Added) {
+func (s *State) applyAdded(e AddedV1) {
 	s.ID = e.ID
 }

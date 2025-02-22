@@ -33,8 +33,9 @@ func NewAddPetCommandExecutor() commands.ExecutorFunc[AddPetCommand, *State] {
 			return nil, nil
 		}
 		return []es.Content{
-			Added{
-				ID: cmd.ID,
+			AddedV1{
+				ID:      cmd.ID,
+				PetName: cmd.PetName,
 			},
 		}, nil
 	}
